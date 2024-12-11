@@ -6,6 +6,7 @@ import com.example.schoolmanagementsystem.entity.Exam;
 import com.example.schoolmanagementsystem.entity.Standard;
 import com.example.schoolmanagementsystem.entity.Student;
 import com.example.schoolmanagementsystem.entity.Subject;
+import com.example.schoolmanagementsystem.exception.BadRequestServiceAlertException;
 import com.example.schoolmanagementsystem.repository.ExamRepository;
 import com.example.schoolmanagementsystem.repository.StandardRepository;
 import com.example.schoolmanagementsystem.repository.SubjectRepository;
@@ -25,6 +26,9 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -140,5 +144,16 @@ public class ExamTest {
         assertEquals(Constants.REMOVED, responseDTO.getMessage());
         assertNotNull(responseDTO.getData());
         assertEquals(HttpStatus.OK.name(), responseDTO.getStatus().toUpperCase());
+    }
+
+    @Test
+    public void testRemoveNegative(){
+        String id ="10";
+        when(this.examRepository.existsById(id)).thenReturn(false);
+        try{
+            ResponseDTO responseDTO=this.examService.remove(id);
+        }catch (BadRequestServiceAlertException exception){
+            assertEquals(Constants.ID_NOT_NULL,exception.getMessage());
+        }
     }
 }

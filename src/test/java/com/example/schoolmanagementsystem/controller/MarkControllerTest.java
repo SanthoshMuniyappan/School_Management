@@ -36,11 +36,11 @@ public class MarkControllerTest {
 
         when(markService.create(markRequestDTO)).thenReturn(responseDTO);
 
-        mockMvc.perform(post("/api/exam/create")
+        mockMvc.perform(post("/api/mark/create")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"mark\":\"90\"}"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"message\":\"School created successfully\"}"));
+                .andExpect(content().json("{\"message\":\"Mark created successfully\"}"));
     }
 
     @Test

@@ -15,7 +15,7 @@ public class GlobalExceptionHandler {
     public ResponseDTO handleBadRequestAlertException(BadRequestServiceAlertException exception) {
         ResponseDTO responseDTO = new ResponseDTO();
         exception.printStackTrace();
-        responseDTO.setData(HttpStatus.BAD_REQUEST.getReasonPhrase());
+        responseDTO.setStatus(HttpStatus.BAD_REQUEST.getReasonPhrase());
         responseDTO.setMessage(Constants.NOT_FOUND);
         responseDTO.setData(exception.getMessage());
         return responseDTO;
