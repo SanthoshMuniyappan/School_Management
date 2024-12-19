@@ -17,4 +17,7 @@ public class Constants {
     public static final String NOT_FOUND = "data not found";
     public static final String FOUND = "Data found";
     public static final String REMOVED="Remove Successfully";
+    public static final String GIVE_VALID_USER="Invalid user request";
+    public static final String USER_NOT_FOUND="User not found";
+    public static final String TOKEN="Authentication token is generated";
 }
