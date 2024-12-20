@@ -5,9 +5,12 @@ import com.example.schoolmanagementsystem.dto.ResponseDTO;
 import com.example.schoolmanagementsystem.service.MarkService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.Mockito.when;
@@ -18,7 +21,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(MarkController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 public class MarkControllerTest {
     @MockBean
     private MarkService markService;
@@ -27,6 +31,7 @@ public class MarkControllerTest {
     private MockMvc mockMvc;
 
     @Test
+    @WithMockUser(username = "Jana", roles = "TEACHER")
     public void testCreateSchool() throws Exception {
         MarkRequestDTO markRequestDTO = new MarkRequestDTO();
         markRequestDTO.setMark("90");
@@ -44,6 +49,7 @@ public class MarkControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "Jana", roles = "TEACHER")
     void testUpdateSchool() throws Exception {
         String id = "32";
         MarkRequestDTO markRequestDTO = new MarkRequestDTO();
@@ -62,6 +68,7 @@ public class MarkControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "Jana", roles = "TEACHER")
     void testRetrieveSchoolById() throws Exception {
         String id = "43";
         ResponseDTO responseDTO = new ResponseDTO();
@@ -75,6 +82,7 @@ public class MarkControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "Jana", roles = "TEACHER")
     void testDeleteSchool() throws Exception {
         String id = "12";
         ResponseDTO responseDTO = new ResponseDTO();

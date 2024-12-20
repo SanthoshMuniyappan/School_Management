@@ -5,9 +5,12 @@ import com.example.schoolmanagementsystem.dto.ResponseDTO;
 import com.example.schoolmanagementsystem.service.ExamService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.Mockito.when;
@@ -18,7 +21,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(ExamController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 public class ExamControllerTest {
 
     @MockBean
@@ -28,6 +32,7 @@ public class ExamControllerTest {
     private MockMvc mockMvc;
 
     @Test
+    @WithMockUser(username = "Santhosh", roles = "EOC")
     public void testCreateSchool() throws Exception {
         ExamRequestDTO examRequestDTO = new ExamRequestDTO();
         examRequestDTO.setName("Half yearly exam");
@@ -45,6 +50,7 @@ public class ExamControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "Santhosh", roles = "EOC")
     void testUpdateSchool() throws Exception {
         String id = "43";
         ExamRequestDTO examRequestDTO = new ExamRequestDTO();
@@ -63,6 +69,7 @@ public class ExamControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "Santhosh", roles = "EOC")
     void testRetrieveSchoolById() throws Exception {
         String id = "23";
         ResponseDTO responseDTO = new ResponseDTO();
@@ -76,6 +83,7 @@ public class ExamControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "Santhosh", roles = "EOC")
     void testRetrieveSchools() throws Exception {
         ResponseDTO responseDTO = new ResponseDTO();
         responseDTO.setMessage("Exams retrieved successfully");
@@ -88,6 +96,7 @@ public class ExamControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "Santhosh", roles = "EOC")
     void testDeleteSchool() throws Exception {
         String id = "12";
         ResponseDTO responseDTO = new ResponseDTO();

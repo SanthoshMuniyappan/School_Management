@@ -5,9 +5,12 @@ import com.example.schoolmanagementsystem.dto.SubjectRequestDTO;
 import com.example.schoolmanagementsystem.service.SubjectService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.Mockito.when;
@@ -18,7 +21,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(SubjectController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 public class SubjectControllerTest {
 
     @MockBean
@@ -28,6 +32,7 @@ public class SubjectControllerTest {
     private MockMvc mockMvc;
 
     @Test
+    @WithMockUser(username = "Thiru", roles = "ADMIN")
     public void testCreateSubject() throws Exception {
         SubjectRequestDTO subjectRequestDTO = new SubjectRequestDTO();
         subjectRequestDTO.setSubjectName("Tamil");
@@ -45,6 +50,7 @@ public class SubjectControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "Thiru", roles = "ADMIN")
     void testUpdateSubject() throws Exception {
         String id = "21";
         SubjectRequestDTO subjectRequestDTO = new SubjectRequestDTO();
@@ -63,6 +69,7 @@ public class SubjectControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "Thiru", roles = "ADMIN")
     void testRetrieveSubjectById() throws Exception {
         String id = "32";
         ResponseDTO responseDTO = new ResponseDTO();
@@ -76,6 +83,7 @@ public class SubjectControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "Thiru", roles = "ADMIN")
     void testRetrieveSubjects() throws Exception {
         ResponseDTO responseDTO = new ResponseDTO();
         responseDTO.setMessage("Subjects retrieved successfully");
@@ -88,6 +96,7 @@ public class SubjectControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "Thiru", roles = "ADMIN")
     void testDeleteSubject() throws Exception {
         String id = "12";
         ResponseDTO responseDTO = new ResponseDTO();

@@ -41,11 +41,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/api/user/**").permitAll()
-                        .requestMatchers("/api/school/**").hasAuthority("ROLE_SUPER_ADMIN")
+                    .requestMatchers("/api/school/**").hasAuthority("ROLE_SUPER_ADMIN")
                         .requestMatchers("/api/standard/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/api/section/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/api/teacher/**").hasAuthority("ROLE_HR")
-                        .requestMatchers("/api/student/**").hasAuthority("OFFICE_ADMIN")
+                        .requestMatchers("/api/student/**").hasAuthority("ROLE_OFFICE_ADMIN")
                         .requestMatchers("/api/teacherSection/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/api/subject/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/api/exam/**").hasAuthority("ROLE_EOC")

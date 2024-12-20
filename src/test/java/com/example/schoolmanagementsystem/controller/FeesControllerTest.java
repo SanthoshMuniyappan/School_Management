@@ -5,9 +5,12 @@ import com.example.schoolmanagementsystem.dto.ResponseDTO;
 import com.example.schoolmanagementsystem.service.FeesService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.Mockito.when;
@@ -18,7 +21,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(FeesController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 public class FeesControllerTest {
 
     @MockBean
@@ -28,6 +32,7 @@ public class FeesControllerTest {
     MockMvc mockMvc;
 
     @Test
+    @WithMockUser(username = "Thiru", roles = "ADMIN")
     public void testCreateFees() throws Exception {
         FeesRequestDTO feesRequestDTO = new FeesRequestDTO();
         feesRequestDTO.setTotalFees("24000");
@@ -45,6 +50,7 @@ public class FeesControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "Thiru", roles = "ADMIN")
     void testUpdateFees() throws Exception {
         String id = "1";
         FeesRequestDTO feesRequestDTO = new FeesRequestDTO();
@@ -63,6 +69,7 @@ public class FeesControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "Thiru", roles = "ADMIN")
     void testRetrieveFeesById() throws Exception {
         String id = "1";
         ResponseDTO responseDTO = new ResponseDTO();
@@ -76,6 +83,7 @@ public class FeesControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "Thiru", roles = "ADMIN")
     void testRetrieveFees() throws Exception {
         ResponseDTO responseDTO = new ResponseDTO();
         responseDTO.setMessage("Fees retrieved successfully");
@@ -88,6 +96,7 @@ public class FeesControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "Thiru", roles = "ADMIN")
     void testDeleteFees() throws Exception {
         String id = "12";
         ResponseDTO responseDTO = new ResponseDTO();
